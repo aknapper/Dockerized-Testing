@@ -14,7 +14,6 @@ subgraph B[Docker Container]
 
 subgraph C[CppuTest Test Framework]
     C1[test_runner]
-    C2[test_executable]
     test_x
     test_y
     test_z
@@ -26,12 +25,8 @@ subgraph C[CppuTest Test Framework]
     A-2 --> |invokes| C1
     B-1 -.-> |provides cpputest| C1
     B-2 -.-> |provides source files| C1
-    C1 --> |runs| test_x 
-    C1 --> |runs| test_y
-    C1 --> |runs| test_z
-    test_x --> |produces results| C2
-    test_y --> |produces results| C2
-    test_z --> |produces results| C2
-    
+    C1 --> test_x 
+    C1 --> test_y
+    C1 --> test_z
 ```
 Running unit tests this way also comes with the benefit of being able to make changes to the codebase on your local machine and quickly re-testing via the running container since the volume is bind mounted to the container.
