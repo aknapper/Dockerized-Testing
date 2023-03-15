@@ -1,0 +1,22 @@
+# set base image for subsequent instructions to ubuntu
+FROM ubuntu:22.04
+
+# execute command to install utilities
+RUN apt update \
+    && apt install -y wget \
+                      build-essential \
+                      autoconf \
+                      automake \
+                      libtool
+
+# build cpputest from source (see https://cpputest.github.io/ "From source install")
+RUN wget https://github.com/cpputest/cpputest/releases/download/v4.0/cpputest-4.0.tar.gz && \
+    tar xf cpputest-4.0.tar.gz && \
+    mkdir -p /usr/local/ && \
+    mv cpputest-4.0/ /usr/local/cpputest/ && cd /usr/local/cpputest/ && \
+    autoreconf -i && \
+    ./configure && \
+    make
+
+# set CPPUTEST_HOME env variable
+ENV CPPUTEST_HOME=/usr/local/cpputest

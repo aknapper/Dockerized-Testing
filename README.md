@@ -30,3 +30,20 @@ subgraph C[CppuTest Test Framework]
     C1 --> test_z
 ```
 Running unit tests this way also comes with the benefit of being able to make changes to the codebase on your local machine and quickly re-testing via the running container since the volume is bind mounted to the container.
+## Usage
+### Docker
+Install the image with
+```
+docker pull knapper/ubuntu-cpputest
+```
+#### Running Container for Unit Testing
+Run the container with
+```
+MOUNT_DIR=$PWD/../:/usr/src
+WORKING_DIR=/usr/src/${PWD##*/}
+docker run -it --rm -v $MOUNT_DIR -w $WORKING_DIR knapper/ubuntu-cpputest
+```
+or you can source the `run-container.sh` script.
+```
+source ./run-container.sh
+```
