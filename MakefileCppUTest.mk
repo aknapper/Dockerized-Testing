@@ -18,7 +18,7 @@ TEST_SRC_DIRS = \
 	.\
 	tests\
 	tests/swap\
-	test/GpioDriver\
+	tests/GpioDriver\
 
 INCLUDE_DIRS =\
   .\
